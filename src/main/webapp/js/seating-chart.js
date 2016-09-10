@@ -14,14 +14,15 @@ export class SeatingChart {
 
     render() {
         let seatFactory = this.seatFactory;
-        var data = this.service.getSeats();
+        var promise = this.service.getSeats();
         let all_view = document.getElementById('all_view');
         var obj;
-        data.forEach(function (o, index) {
-            var g_seat = seatFactory.createGroup(o.id);
-            all_view.appendChild(g_seat);
-            let seats = o.seats;
-            seats.forEach(function (s) {
+        promise.then(function(data) { //resolve的回调
+            data.forEach(function (o, index) {
+                //var g_seat = seatFactory.createGroup(o.id);
+                //all_view.appendChild(g_seat);
+                //let seats = o;
+                //seats.forEach(function (s) {
                 obj = seatFactory.create();
                 //var x = (s.x + 0.5) * 2;
                 //var y = (s.y + 0.5) * 2;
@@ -29,9 +30,13 @@ export class SeatingChart {
                 let y = s.y;
                 obj.setAttribute('x', x);
                 obj.setAttribute('y', y);
-                g_seat.appendChild(obj);
+                all_view.appendChild(obj);
+                //})
             })
-        })
+        }, function(error) {  //reject的回调
+            console.error('出错了', error);
+        });
+
     }
 
     /**
@@ -109,28 +114,33 @@ export class SeatingChart {
     createOutline(){
 
         let outLineFactory = this.outLineFactory;
-        var data = this.service.getOutlineData();
+        var promise = this.service.getOutlineData();
         var that = this;
-        data.forEach(function (value,index) {
-            let polygon = outLineFactory.create(value);
-            polygon.addEventListener('click',function(){
-                var value = 3;
-                var vSize = Global.get().getViewSize();
-                that.focus(polygon, value, vSize);
-            });
-            var bg = document.getElementById('bg');
-            bg.appendChild(polygon);
+        promise.then(function(data) { //resolve的回调
+            data.forEach(function (value,index) {
+                let polygon = outLineFactory.create(value);
+                polygon.addEventListener('click',function(){
+                    var value = 3;
+                    var vSize = Global.get().getViewSize();
+                    that.focus(polygon, value, vSize);
+                });
+                var bg = document.getElementById('bg');
+                bg.appendChild(polygon);
 
-            //小图
-            let polygon1 = outLineFactory.create(value);
-            polygon1.addEventListener('click',function(){
-                var value = 3;
-                var vSize = Global.get().getViewSize();
-                that.focus(polygon, value, vSize);
-            });
-            var nav = document.getElementById('nav');
-            nav.appendChild(polygon1);
+                //小图
+                let polygon1 = outLineFactory.create(value);
+                polygon1.addEventListener('click',function(){
+                    var value = 3;
+                    var vSize = Global.get().getViewSize();
+                    that.focus(polygon, value, vSize);
+                });
+                var nav = document.getElementById('nav');
+                nav.appendChild(polygon1);
+            })
+        }, function(error) {  //reject的回调
+            console.error('出错了', error);
         })
+
 
 
     }

@@ -46,6 +46,9 @@ public class VenuesRest {
         float[][] seatPoints = new float[list.size()][2];
         int i = 0;
         for(SeatDto dto:list){
+            if(dto == null){
+                continue;
+            }
             float[] p = new float[2];
             p[0] = dto.getX();
             p[1] = dto.getY();
@@ -94,15 +97,19 @@ public class VenuesRest {
 
         cache.put(SEATKEY,new HashMap<Integer,List<SeatDto>>());
         cache.put(AREAKEY,new ArrayList<AreaDto>());
+        HashMap<Integer,List<SeatDto>> seatMap = (HashMap<Integer,List<SeatDto>>)cache.get(SEATKEY);
         for(SeatDto seatDto:seatDtos){
             int standId = seatDto.getbStandId();
-            HashMap<Integer,List<SeatDto>> seatMap = (HashMap<Integer,List<SeatDto>>)cache.get(SEATKEY);
             List<SeatDto> seatDtoList = seatMap.get(standId);
             if(seatDtoList==null){
                 seatDtoList = new ArrayList<SeatDto>();
                 seatMap.put(standId,seatDtoList);
             }
-            seatDtoList.add(seatDto);
+            SeatDto newSeatDao = new SeatDto();
+            newSeatDao.setbStandId(standId);
+            newSeatDao.setX(seatDto.getX());
+            newSeatDao.setY(seatDto.getY());
+            seatDtoList.add(newSeatDao);
         }
 
         List<AreaDto> areaDtos = getAreaDtoList();

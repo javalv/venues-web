@@ -1,6 +1,6 @@
-import {SeatingChart} from './seating-chart.js';
-import {selectElement} from './svg-drag.js';
-import {Global} from './global.js';
+import {SeatingChart} from './js/seating-chart.js';
+import {selectElement} from './js/svg-drag.js';
+import {Global} from './js/global.js';
 
 let g = Global.get();
 g.syncSvgPx({x:800,y:600});
