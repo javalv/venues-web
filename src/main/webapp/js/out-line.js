@@ -5,7 +5,7 @@ export class OutLine {
         var rc = value.rc.split("|").join(" ");
         var polygon = document.createElementNS(SVG_NS, "polygon");
         polygon.setAttribute("points", rc);
-        // polygon.setAttribute("style", "fill:#cccccc;stroke:#000000;stroke-width:1");
+        polygon.setAttribute("id",value.standId);
         return polygon;
     }
 }

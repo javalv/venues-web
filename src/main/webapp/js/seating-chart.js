@@ -19,19 +19,14 @@ export class SeatingChart {
         var obj;
         promise.then(function(data) { //resolve的回调
             data.forEach(function (o, index) {
-                //var g_seat = seatFactory.createGroup(o.id);
-                //all_view.appendChild(g_seat);
-                //let seats = o;
-                //seats.forEach(function (s) {
+
                 obj = seatFactory.create();
-                //var x = (s.x + 0.5) * 2;
-                //var y = (s.y + 0.5) * 2;
-                let x = s.x;
-                let y = s.y;
+
+                let x = o[0];
+                let y = o[1];
                 obj.setAttribute('x', x);
                 obj.setAttribute('y', y);
                 all_view.appendChild(obj);
-                //})
             })
         }, function(error) {  //reject的回调
             console.error('出错了', error);

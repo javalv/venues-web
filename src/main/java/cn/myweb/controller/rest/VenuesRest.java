@@ -73,7 +73,7 @@ public class VenuesRest {
         translate(seatPoints,center_seats,center_area);
 
         return toJson(seatPoints);
-
+//        return "{\"status\":\"ok\"}";
     }
 
     @RequestMapping(value = "/getAreas", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
@@ -89,7 +89,7 @@ public class VenuesRest {
         }
 
         return toJson(cache.get(AREAKEY));
-
+//        return "{\"status\":\"ok\"}";
     }
 
     private void init() throws Exception{
