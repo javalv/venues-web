@@ -9,8 +9,8 @@ export class DataService {
         this.http = new Http();
     }
 
-    getSeats() {
-        return this.http.getJSON("http://localhost:8080/venues/getSeats?standId=1764");
+    getSeats(standId) {
+        return this.http.getJSON(`http://localhost:8080/venues/getSeats?standId=${standId}`);
     }
 
     getOutlineData() {

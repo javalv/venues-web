@@ -1,5 +1,6 @@
 import {SeatingChart} from './js/seating-chart.js';
 import {selectElement} from './js/svg-drag.js';
+import {Draw} from './js/draw.js';
 import {Global} from './js/global.js';
 
 let g = Global.get();
@@ -9,6 +10,7 @@ let chart = new SeatingChart();
 chart.createOutline();
 chart.render();
 
+let draw = new Draw();
 
 var doFocus = function (obj,value) {
     var vSize = g.getViewSize();
@@ -21,9 +23,11 @@ var doScale = function (value) {
 }
 
 document.getElementById("focusBtn").onclick = function () {
-    var value = 8;
-    var obj = document.getElementById('i1763');
-    doFocus (obj,value);
+    //var value = 8;
+    //var obj = document.getElementById('i1763');
+    //doFocus (obj,value);
+    var vSize = g.getViewSize();
+    draw.scale(selected,vSize,0.65);
 }
 
 document.getElementById("zoomOutBtn").onclick = function () {
@@ -63,5 +67,31 @@ document.body.onmousewheel = function(e) {
 document.getElementById("bg").onmousedown = function (evt) {
     selectElement(evt);
 }
+
+let r = 0;
+var rotateValue = function (value) {
+    if(selected){
+        r = r + value;
+        var box = selected.getBBox();
+        var x = box.x + box.width / 2;
+        var y = box.y + box.height / 2;
+        draw.rotate(selected,r, [x,y]);
+    }
+}
+document.getElementById("rotateAddBtn").onclick= function (evt) {
+    rotateValue(5);
+}
+document.getElementById("rotateSubBtn").onclick= function (evt) {
+    rotateValue(-5);
+}
+
+
+let selected;
+//选中
+window.onSelected= function (obj) {
+   selected = obj;
+}
+
+
 
 

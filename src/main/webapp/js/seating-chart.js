@@ -14,23 +14,35 @@ export class SeatingChart {
 
     render() {
         let seatFactory = this.seatFactory;
-        var promise = this.service.getSeats();
         let all_view = document.getElementById('all_view');
         var obj;
-        promise.then(function(data) { //resolve的回调
-            data.forEach(function (o, index) {
+        var that = this;
+        var promise = this.service.getOutlineData();
+        promise.then(data1 => { //查询看台ID
+            data1.forEach(function (value,index) {
+                let g = seatFactory.createGroup(value.standId);
+                all_view.appendChild(g);
+                that.service.getSeats(value.standId).then(data => { //resolve的回调
+                    if(!data){
+                        return;
+                    }
+                    data.forEach(function (o, index) {
 
-                obj = seatFactory.create();
+                        obj = seatFactory.create();
 
-                let x = o[0];
-                let y = o[1];
-                obj.setAttribute('x', x);
-                obj.setAttribute('y', y);
-                all_view.appendChild(obj);
+                        let x = o[0];
+                        let y = o[1];
+                        obj.setAttribute('x', x);
+                        obj.setAttribute('y', y);
+                        g.appendChild(obj);
+                    })
+                }, function(error) {  //reject的回调
+                    console.error('出错了', error);
+                });
             })
-        }, function(error) {  //reject的回调
-            console.error('出错了', error);
-        });
+        })
+
+
 
     }
 
@@ -112,18 +124,21 @@ export class SeatingChart {
         var promise = this.service.getOutlineData();
         var that = this;
         promise.then(function(data) { //resolve的回调
-            data.forEach(function (value,index) {
-                let polygon = outLineFactory.create(value);
+            data.forEach(function (obj,index) {
+                let polygon = outLineFactory.create(obj);
                 polygon.addEventListener('click',function(){
                     var value = 3;
                     var vSize = Global.get().getViewSize();
                     that.focus(polygon, value, vSize);
+
+                    window.onSelected(document.getElementById("i"+obj.standId));
+
                 });
                 var bg = document.getElementById('bg');
                 bg.appendChild(polygon);
 
                 //小图
-                let polygon1 = outLineFactory.create(value);
+                let polygon1 = outLineFactory.create(obj);
                 polygon1.addEventListener('click',function(){
                     var value = 3;
                     var vSize = Global.get().getViewSize();

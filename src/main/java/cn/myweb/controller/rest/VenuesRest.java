@@ -42,6 +42,9 @@ public class VenuesRest {
 
         int sId = Integer.valueOf(standId);
         list = getSeatDtoList(sId);
+        if(list == null || list.isEmpty()){
+            return null;
+        }
         //座位中心点
         float[][] seatPoints = new float[list.size()][2];
         int i = 0;

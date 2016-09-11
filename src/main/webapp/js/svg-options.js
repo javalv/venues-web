@@ -12,31 +12,33 @@ export class SvgOptions{
         if(cover || cover == true){
             optionsAttrs.addAttr(key,value);
         }else {
-            if(attrs.size > 0){
-                for (let attr of attrs.entries()) {
-                    let _key = attr[0];
-                    let _value = attr[1];
-                    if(key == _key){
-                        optionsAttrs.addAttr(key,value);
-                    }else {
-                        optionsAttrs.addAttr(_key,_value);
-                    }
+            //if(attrs.size > 0){
+            attrs.set(key,value);
+            for (let attr of attrs.entries()) {
+                let _key = attr[0];
+                let _value = attr[1];
+                if(key == _key){
+                    optionsAttrs.addAttr(key,value);
+                }else {
+                    optionsAttrs.addAttr(_key,_value);
                 }
-            }else {
-                optionsAttrs.addAttr(key,value);
             }
+            //}else {
+            //    optionsAttrs.addAttr(key,value);
+            //}
         }
 
         this.setAttribute(obj,'transform',optionsAttrs.getAttrs());
 
     }
 
+
     setAttribute(obj,attrName,attrs){
         let attrValue = "";
         for(let attr of attrs.entries()){
             let key = attr[0];
             let value = attr[1];
-            let a = key + "(" + value[0] + "," + value[1] + ")" ;
+            let a = key + "(" + value.join(',') + ")" ;
             attrValue += a + " ";
         }
 
@@ -62,6 +64,9 @@ export class SvgOptions{
             }
             if(temp.startsWith('translate')){
                 attrs.set('translate',temp.slice(10, -1).split(','));
+            }
+            if(temp.startsWith('rotate')){
+                attrs.set('rotate',temp.slice(7, -1).split(','));
             }
         })
 
