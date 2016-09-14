@@ -45,6 +45,11 @@ export class SvgDrag {
 
         let dx = evt.clientX - this.currentX;
         let dy = evt.clientY - this.currentY;
+        // console.log(dx,dy)
+        // if(Math.abs(dx) < 10 && Math.abs(dy) < 10){
+        //     return ;
+        // }
+        // console.log('move');
         this.currentMatrix[0] += dx / (Global.get().pxRatio()[0] * sx);
         this.currentMatrix[1] += dy / (Global.get().pxRatio()[1] * sy);
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        polygon{
+            fill: rgba(204, 204, 204, 0.47);stroke:#000000;stroke-width:1
+        }
+        polygon:hover{
+            fill: #878787;stroke: #1fa868;stroke-width:5
+        }
+        #bg{
+            fill:#fff;stroke:#000000;stroke-width:0.2
+        }
+        #svg-view{
+            border: blue solid 1px;
+        }
+    </style>
+    <!--<script src="traceur/traceur.js"></script>-->
+    <!--<script src="traceur/BrowserSystem.js"></script>-->
+    <!--<script src="traceur/bootstrap.js"></script>-->
+
+    <script src="./index.js"></script>
+</head>
+<body>
+<div style="display: inline-block">
+    <svg id="svg-view" xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" height="600"
+         viewBox="0 0 800 600" >
+        <!--<g id="bg">-->
+            <!--<rect width="800" height="600"  transform="translate(0,0)"  />-->
+        <!--</g>-->
+        <!--<g id="all_view" transform="translate(0,0)" >-->
+        <g id="all_view" transform="scale(1,1)" >
+            <!--<g id="g_seat" fill="dodgerblue"></g>-->
+        </g>
+        <defs>
+            <circle id="seat" r="0.5"/>
+        </defs>
+    </svg>
+</div>
+<div style="display: inline-block">
+    <div>
+        <button id="zoomOutBtn" onclick="left()">left</button>
+        <button id="zoomInBtn" onclick="right()">right</button>
+        <button id="focusBtn">focus</button>
+        <button id="rotateAddBtn" onclick="zoomOut()">+</button>
+        <button id="rotateSubBtn" onclick="zoomOut()">-</button>
+
+    </div>
+    <!--<div>-->
+        <!--<svg id="svg-view1" xmlns="http://www.w3.org/2000/svg" version="1.1" width="240" height="180"-->
+             <!--viewBox="0 0 800 600" style="border: blue solid 1px;">-->
+            <!--<g id="nav">-->
+
+            <!--</g>-->
+        <!--</svg>-->
+    <!--</div>-->
+</div>
+
+</body>
+</html>

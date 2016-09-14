@@ -7,14 +7,18 @@ export class DataService {
 
     constructor() {
         this.http = new Http();
+        this.host = location.host;
+        console.log(this.host);
     }
 
     getSeats(standId) {
-        return this.http.getJSON(`http://localhost:8080/venues/getSeats?standId=${standId}`);
+        let host = this.host;
+        return this.http.getJSON(`http://${host}/venues/getSeats?standId=${standId}`);
     }
 
-    getOutlineData() {
-        return this.http.getJSON("http://localhost:8080/venues/getAreas");
+    getOutlineData(){
+        let host = this.host;
+        return this.http.getJSON(`http://${host}/venues/getAreas`);
     }
 
 }

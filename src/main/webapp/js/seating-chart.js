@@ -19,6 +19,7 @@ export class SeatingChart {
         var that = this;
         var promise = this.service.getOutlineData();
         promise.then(data1 => { //查询看台ID
+            let count = 60000;
             data1.forEach(function (value,index) {
                 let g = seatFactory.createGroup(value.standId);
                 all_view.appendChild(g);
@@ -34,7 +35,10 @@ export class SeatingChart {
                         let y = o[1];
                         obj.setAttribute('x', x);
                         obj.setAttribute('y', y);
-                        g.appendChild(obj);
+
+                        if(count-- > 0){
+                            g.appendChild(obj);
+                        }
                     })
                 }, function(error) {  //reject的回调
                     console.error('出错了', error);

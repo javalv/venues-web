@@ -5,7 +5,7 @@ export class Seat {
     createGroup(id){
         let g = document.createElementNS(SVG_NS, 'g');
         g.setAttribute('id','i' + id);
-        g.setAttribute('fill','dodgerblue');
+        // g.setAttribute('fill','dodgerblue');
         return g;
     }
 
