@@ -16,33 +16,37 @@
             border: blue solid 1px;
         }
     </style>
-    <!--<script src="traceur/traceur.js"></script>-->
-    <!--<script src="traceur/BrowserSystem.js"></script>-->
-    <!--<script src="traceur/bootstrap.js"></script>-->
+
 
     <script src="./index.js"></script>
+    <script src="./drag.js"></script>
 </head>
 <body>
-<div style="display: inline-block">
-    <svg id="svg-view" xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" height="600"
-         viewBox="0 0 800 600" >
-        <!--<g id="bg">-->
+<div style="display: inline-block" >
+    <!--draggable="true" ondragstart="drag(event)"-->
+    <div id="scroll-div" style="position:absolute; height:600px;width: 800px; overflow:auto"
+         onmousedown="selectElement(event)">
+        <svg id="svg-view" xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" height="600"
+             viewBox="0 0 800 600" >
+            <!--<g id="bg">-->
             <!--<rect width="800" height="600"  transform="translate(0,0)"  />-->
-        <!--</g>-->
-        <!--<g id="all_view" transform="translate(0,0)" >-->
-        <g id="all_view" transform="scale(1,1)" >
-            <!--<g id="g_seat" fill="dodgerblue"></g>-->
-        </g>
-        <defs>
-            <circle id="seat" r="0.5"/>
-        </defs>
-    </svg>
+            <!--</g>-->
+            <!--<g id="all_view" transform="translate(0,0)" >-->
+            <g id="all_view" transform="scale(1,1)" >
+                <!--<g id="g_seat" fill="dodgerblue"></g>-->
+            </g>
+            <defs>
+                <circle id="seat" r="0.5"/>
+            </defs>
+        </svg>
+    </div>
+
 </div>
 <div style="display: inline-block">
-    <div>
+    <div >
         <button id="zoomOutBtn" onclick="left()">left</button>
         <button id="zoomInBtn" onclick="right()">right</button>
-        <button id="focusBtn">focus</button>
+        <button id="focusBtn" onclick="zOut()">focus</button>
         <button id="rotateAddBtn" onclick="zoomOut()">+</button>
         <button id="rotateSubBtn" onclick="zoomOut()">-</button>
 
