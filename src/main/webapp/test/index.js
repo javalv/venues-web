@@ -31,7 +31,7 @@ function httpGet(url,callback) {
 
 function render(){
     var url = "http://" + location.host + "/venues/getAreas";
-    var count = 60000;
+    var count = 600;
     //setTimeout(function () {
     //    document.getElementById("all_view").addEventListener('click', function (evt) {
     //        zOut();
@@ -129,7 +129,7 @@ function drop(ev)
 
 var scale = 1.0;
 function zOut(obj){
-    var value = 3.0;
+    var value = 1.2;
     scale = scale * value;
     var svg_view = document.getElementById("svg-view");
     var width = svg_view.getAttribute("width");
@@ -149,3 +149,5 @@ function zOut(obj){
     document.getElementById('scroll-div').scrollTop = y;
     document.getElementById('scroll-div').scrollLeft = x;
 }
+
+
